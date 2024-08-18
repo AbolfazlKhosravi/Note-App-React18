@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const AddNewNote = () => {
+const AddNewNote = ({ setNotes }) => {
   const [data, setData] = useState({ title: "", des: "" });
   const handleChangeNote = ({ target: { name, value } }) => {
     setData({ ...data, [name]: value });
@@ -11,10 +11,11 @@ const AddNewNote = () => {
       title: data.title,
       description: data.des,
       complated: false,
-      startedAt: new Date().toISOString(),
+      createdAd: new Date().toISOString(),
       id: Date.now(),
     };
     console.log(newNote);
+    setNotes((preNotes) => [...preNotes, newNote]);
     setData({ title: "", des: "" });
   };
   return (
