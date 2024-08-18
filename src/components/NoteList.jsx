@@ -1,7 +1,23 @@
-const NoteList = ({ notes, setNotes }) => {
+const NoteList = ({ notes, setNotes, sortBy }) => {
+  let sortedNotes = notes;
+  if (sortBy === "earliest") {
+    sortedNotes = [...notes].sort(
+      (a, b) => new Date(a.createdAd) - new Date(b.createdAd)
+    );
+  }
+  if (sortBy === "latest") {
+    sortedNotes = [...notes].sort(
+      (a, b) => new Date(b.createdAd) - new Date(a.createdAd)
+    );
+  }
+  if (sortBy === "completed") {
+    sortedNotes = [...notes].sort(
+      (a, b) => Number(a.complated) - Number(b.complated)
+    );
+  }
   return (
     <div className="note-list">
-      {notes.map((note) => {
+      {sortedNotes.map((note) => {
         return <NoteItem key={note.id} note={note} setNotes={setNotes} />;
       })}
     </div>
@@ -34,12 +50,13 @@ function NoteItem({ note, setNotes }) {
             type="checkbox"
             onChange={() => {
               setNotes((prevNotes) =>
-                prevNotes.map(
-                  (prevNote) =>
-                    prevNote.id === note.id && {
-                      ...prevNote,
-                      complated: !prevNote.complated,
-                    }
+                prevNotes.map((prevNote) =>
+                  prevNote.id === note.id
+                    ? {
+                        ...prevNote,
+                        complated: !prevNote.complated,
+                      }
+                    : prevNote
                 )
               );
             }}
