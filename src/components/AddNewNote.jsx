@@ -7,6 +7,9 @@ const AddNewNote = ({ setNotes }) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(!data.title || !data.des){
+      return alert("please complate all feilds")
+    }
     const newNote = {
       title: data.title,
       description: data.des,

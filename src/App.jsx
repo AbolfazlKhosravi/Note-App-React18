@@ -10,7 +10,7 @@ function App() {
       <div className="note-app">
         <AddNewNote setNotes={setNotes}/>
         <div className="note-container">
-          <NoteList notes={notes}/>
+          <NoteList notes={notes} setNotes={setNotes}/>
         </div>
       </div>
     </div>
