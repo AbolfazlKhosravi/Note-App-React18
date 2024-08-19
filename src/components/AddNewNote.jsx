@@ -17,7 +17,6 @@ const AddNewNote = ({ setNotes }) => {
       createdAd: new Date().toISOString(),
       id: Date.now(),
     };
-    console.log(newNote);
     setNotes((preNotes) => [...preNotes, newNote]);
     setData({ title: "", des: "" });
   };
